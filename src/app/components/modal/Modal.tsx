@@ -17,8 +17,8 @@ const Modal = () => {
                     <div className='flex justify-center'>
                         <Image src={logo} alt="Logo" width={350} height={72.5} />
                     </div>
-                    <div className=''>
-                        <div className='flex justify-start flex-wrap gap-[6px]'>
+                    <div className='w-full'>
+                        <div className='flex flex-wrap gap-[6px] ml-9'>
                             {
                                 listModule.map((item: any, key: number) => (
                                     <Card image={item.image} altText={item.altTitle} cardName={item.title} key={key} />
