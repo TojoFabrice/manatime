@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import solder from '/public/icons/Solder.svg'
+import solder from '../../assets/icons/Solder.svg'
 
 
 const Table = () => {
