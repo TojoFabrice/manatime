@@ -13,11 +13,11 @@ const Modal = () => {
     return (
         <div className='absolute inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-start'>
             <div className='w-[800px] h-screen '>
-                <div className='bg-white p-4 h-screen text-black rounded-r-[40px] flex justify-evenly flex-col'>
-                    <div className='flex justify-center'>
+                <div className='bg-white p-4 h-screen text-black rounded-r-[40px]'>
+                    <div className='flex justify-center mt-[118px]'>
                         <Image src={logo} alt="Logo" width={350} height={72.5} />
                     </div>
-                    <div className='w-full'>
+                    <div className='w-full mt-[80px]'>
                         <div className='flex flex-wrap gap-[6px] ml-9'>
                             {
                                 listModule.map((item: any, key: number) => (
