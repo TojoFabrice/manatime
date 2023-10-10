@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import accueil from '../../assets/icons/Accueil.svg'
 import add from '../../assets/icons/Add.svg'
@@ -16,15 +16,15 @@ import { Poppins, Roboto_Mono } from 'next/font/google'
 
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-poppins',
+    weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 })
 const roboto = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto'
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-roboto'
 })
 
 const MenuSidebar = () => {
@@ -37,16 +37,20 @@ const MenuSidebar = () => {
             <div className='w-full'>
                 <ul>
                     <li className='bg-primary  border border-primary border-t-lineTop border-b-lineBottom h-66px flex items-center relative'>
-                        <Image src={accueil} alt="Abscence icon" width={22} height={22} className='ml-5' />
-                        <div className='text-center w-full absolute'>
-                            <Link href="#" className={`${poppins.variable} font-sans font-medium text-lg`}>Accueil</Link>
-                        </div>
+                        <Link href="/pages/home" className={`${poppins.variable} font-sans font-medium text-lg flex w-full h-full`}>
+                            <Image src={accueil} alt="Abscence icon" width={22} height={22} className='ml-5' />
+                            <div className='text-center w-full h-[66px] absolute flex justify-center items-center'>
+                                Accueil
+                            </div>
+                        </Link>
                     </li>
-                    <li className='bg-primary  border border-primary border-t-lineTop border-b-lineBottom h-66px flex items-center relative'>
-                        <Image src={add} alt="Abscence icon" width={22} height={22} className='ml-5' />
-                        <div className='text-center w-full absolute'>
-                            <Link href="#" className={`${poppins.variable} font-sans font-medium text-lg`}>Ajouter</Link>
-                        </div>
+                    <li className='bg-primary  border border-primary border-t-lineTop border-b-lineBottom h-66px flex items-center relative active:bg-blue-400'>
+                        <Link href="/pages/addnew" className={`${poppins.variable} font-sans font-medium text-lg flex w-full h-full`}>
+                            <Image src={add} alt="Abscence icon" width={22} height={22} className='ml-5' />
+                            <div className='text-center w-full h-[66px] absolute flex justify-center items-center'>
+                                Ajouter
+                            </div>
+                        </Link>
                     </li>
                 </ul>
             </div>
@@ -82,9 +86,9 @@ const MenuSidebar = () => {
                     <li className={`border-t border-b border-t-borderMenu border-b-borderMenu h-66px flex items-center relative ${solde ? 'bg-white text-[#084693] border-b-white' : ''}`}>
                         {
                             solde ?
-                            <Image src={soldesBlue} alt="Abscence icon" width={22} height={22} className='ml-5' />
-                            :
-                            <Image src={soldes} alt="Abscence icon" width={22} height={22} className='ml-5' />
+                                <Image src={soldesBlue} alt="Abscence icon" width={22} height={22} className='ml-5' />
+                                :
+                                <Image src={soldes} alt="Abscence icon" width={22} height={22} className='ml-5' />
                         }
                         <div className='text-center w-full absolute'>
                             <Link href="#" className={`${poppins.variable} font-sans font-medium text-15px`}>Soldes</Link>
@@ -92,9 +96,9 @@ const MenuSidebar = () => {
                         <button className='absolute right-[15px]' onClick={() => setSolde(!solde)}>
                             {
                                 solde ?
-                                <Image src={stripeBlue} alt="Abscence icon" width={11} height={7} className='rotate-180 duration-500'/>
-                                :
-                                <Image src={stripe} alt="Abscence icon" width={11} height={7} className='duration-500'/>
+                                    <Image src={stripeBlue} alt="Abscence icon" width={11} height={7} className='rotate-180 duration-500' />
+                                    :
+                                    <Image src={stripe} alt="Abscence icon" width={11} height={7} className='duration-500' />
                             }
                         </button>
                     </li>

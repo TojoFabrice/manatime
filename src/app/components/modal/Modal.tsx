@@ -11,7 +11,7 @@ const Modal = () => {
     const { isVisible, setIsVisible } = useVisibilityContext();
     if (!isVisible) return
     return (
-        <div className='absolute inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-start'>
+        <div className='absolute inset-0 bg-[#CECECE] bg-opacity-40 backdrop-blur-sm flex justify-start'>
             <div className='w-[800px] h-screen '>
                 <div className='bg-white p-4 h-screen text-black rounded-r-[40px]'>
                     <div className='flex justify-center mt-[118px]'>

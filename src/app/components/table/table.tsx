@@ -1,22 +1,27 @@
 import React from 'react'
 import Image from 'next/image'
 import solder from '../../assets/icons/Solder.svg'
+import { Roboto } from 'next/font/google'
 
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight : ['100','300','400','500','700','900']
+})
 
 const Table = () => {
     return (
         <div className="p-[30px] h-auto">
             
             <div className="overflow-auto rounded-lg shadow block">
-                <table className="w-full">
+                <table className={`${roboto.className} font-roboto w-full`}>
                     <thead className="bg-white border-b text-sousmenu">
                         <tr className='divide-x h-[38px]'>
-                            <th className="w-[450px] px-15px text-sm font-semibold tracking-wide text-left">Utilisateurs</th>
+                            <th className={` w-[450px] px-15px text-sm font-semibold tracking-wide text-left`}>Utilisateurs</th>
                             <th className="w-[450px] px-15px text-sm font-semibold tracking-wide text-left">Catégorie</th>
                             <th className="w-[120px] px-15px text-sm font-semibold tracking-wide text-left">Période</th>
                             <th className="w-[120px] px-15px text-sm font-semibold tracking-wide text-left">Solde actuel</th>
                             <th className="w-[120px] px-15px text-sm font-semibold tracking-wide text-left">Solde pris</th>
-                            <th className="w-[120px] px-15px text-sm font-semibold tracking-wide text-left">Solde futu</th>
+                            <th className="w-[120px] px-15px text-sm font-semibold tracking-wide text-left">Solde futur</th>
                             <th className="w-[270px] px-15px text-sm font-semibold tracking-wide text-left"></th>
                         </tr>
                     </thead>
