@@ -30,7 +30,7 @@ const addData = async ({
     sp,
     sf
   }: {
-    utilisateur: string;
+    utilisateur: string | null;
     categorie: string;
     periode: string;
     sa: string;
@@ -46,7 +46,13 @@ const addData = async ({
     return (await res).json();
   };
 
+  
 export default function AddNew() {
+    const options = ['Option 1', 'Option 2'];
+
+    const [value, setValue] = useState<string | null>(options[0]);
+    const [inputValue, setInputValue] = useState('');
+
     const router = useRouter();
     const userRef = useRef<HTMLInputElement | null>(null);
     const categoryRef = useRef<HTMLInputElement | null>(null);
@@ -57,10 +63,10 @@ export default function AddNew() {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        if (userRef.current && categoryRef.current && periodeRef.current && saRef.current && spRef.current && sfRef.current) {
+        if (value && categoryRef.current && periodeRef.current && saRef.current && spRef.current && sfRef.current) {
         //   toast.loading("Sending Request 🚀", { id: "1" });
           await addData({
-            utilisateur: userRef.current?.value,
+            utilisateur: value ,
             categorie: categoryRef.current?.value,
             periode: periodeRef.current?.value,
             sa: saRef.current?.value,
@@ -70,7 +76,7 @@ export default function AddNew() {
         //   toast.success("Blog Posted Successfully", { id: "1" });
           router.push("/pages/home");
         }
-        console.log(userRef.current?.value + " " +categoryRef.current?.value);
+        console.log(value + " " +categoryRef.current?.value);
         
       };
     
@@ -86,27 +92,21 @@ export default function AddNew() {
             >
                 <form onSubmit={handleSubmit} className="space-y-3">
 
-                    {/* <Autocomplete
-                        value={formData.utilisateur}
-                        onChange={(_, newValue) => {
-                            setFormData({ ...formData, utilisateur: newValue });
+                    <Autocomplete
+                        value={value}
+                        onChange={(event: any, newValue: string | null) => {
+                            setValue(newValue);
                         }}
-                        inputValue={formData.utilisateur}
-                        onInputChange={(_, newInputValue) => {
-                            setFormData({ ...formData, utilisateur: newInputValue });
+                        inputValue={inputValue}
+                        onInputChange={(event, newInputValue) => {
+                            setInputValue(newInputValue);
                         }}
-                        id="utilisateur"
+                        id="Utilisateur"
                         options={options}
-                        sx={{ width: '100%' }}
+                        sx={{ width: "100%" }}
                         renderInput={(params) => <TextField {...params} label="Utilisateur" />}
-                    /> */}
-                    <TextField 
-                        inputRef={userRef}
-                        fullWidth 
-                        label="Utilisateur" 
-                        id="Utilisateur" 
-                        
                     />
+
                     <TextField 
                         inputRef={categoryRef}
                         fullWidth 
