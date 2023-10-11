@@ -35,20 +35,17 @@ const Table = ({datas}:any) => {
                             datas.map((item:any) => {
                                 return(
                                     <tr className="bg-white divide-x text-menu h-[39px]" key={item.id}>
-                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                            <a href="#" className=" text-blue-500 hover:underline">{item.utilisateur}</a>
+                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">
+                                            <a href="#" className=" text-sousmenu hover:underline">{item.utilisateur}</a>
                                         </td>
-                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">
+                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">
                                             {item.categorie}
                                         </td>
-                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                            <span
-                                                className="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">Delivered</span>
-                                        </td>
-                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">{item.sa}</td>
-                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">{item.sp}</td>
-                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">{item.sf}</td>
-                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">
+                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">{item.periode}</td>
+                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">{item.sa}</td>
+                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">{item.sp}</td>
+                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">{item.sf}</td>
+                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">
                                             <div className='flex justify-around'>
                                                 <Image src={solder} alt="solder" width={32} height={32} />
                                                 <Image src={solder} alt="solder" width={32} height={32} />
