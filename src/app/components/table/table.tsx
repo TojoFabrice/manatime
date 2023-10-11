@@ -21,13 +21,13 @@ const Table = ({datas}:any) => {
                 <table className={`${roboto.className} font-roboto w-full`}>
                     <thead className="bg-white border-b text-sousmenu">
                         <tr className='divide-x h-[38px]'>
-                            <th className="w-[450px] px-15px text-base font-medium  text-left">Utilisateurs</th>
-                            <th className="w-[450px] px-15px text-base font-medium  text-left">Catégorie</th>
-                            <th className="w-[120px] px-15px text-base font-medium  text-left">Période</th>
-                            <th className="w-[120px] px-15px text-base font-medium  text-left">Solde actuel</th>
-                            <th className="w-[120px] px-15px text-base font-medium  text-left">Solde pris</th>
-                            <th className="w-[120px] px-15px text-base font-medium  text-left">Solde futur</th>
-                            <th className="w-[270px] px-15px text-base font-medium  text-left"></th>
+                            <th className="w-[450px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap">Utilisateurs</th>
+                            <th className="w-[450px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap">Catégorie</th>
+                            <th className="w-[120px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap">Période</th>
+                            <th className="w-[120px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap">Solde actuel</th>
+                            <th className="w-[120px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap">Solde pris</th>
+                            <th className="w-[120px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap">Solde futur</th>
+                            <th className="w-[270px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap"></th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 font-normal">
