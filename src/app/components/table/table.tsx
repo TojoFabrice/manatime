@@ -32,7 +32,7 @@ const Table = ({datas}:any) => {
                     </thead>
                     <tbody className="divide-y divide-gray-200 font-normal">
                         {
-                            datas.map((item:any) => {
+                            datas && datas.map((item:any) => {
                                 return(
                                     <tr className="bg-white divide-x text-menu h-[39px]" key={item.id}>
                                         <td className="px-15px text-base text-sousmenu whitespace-nowrap">
