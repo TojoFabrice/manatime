@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState, useEffect } from 'react';
-import fs from 'fs/promises';
+// import fs from 'fs/promises';
 
 
 const options = ['Option 1', 'Option 2'];
@@ -30,16 +30,16 @@ export default function AddNew() {
         sf: '',
     });
 
-    useEffect(() => {
-        // Lire le fichier JSON lors du chargement du composant
-        fs.readFile('data.json', 'utf-8')
-            .then((fileData: any) => {
-                setData(JSON.parse(fileData));
-            })
-            .catch((err: any) => {
-                console.error('Erreur lors de la lecture du fichier JSON :', err);
-            });
-    }, []);
+    // useEffect(() => {
+    //     // Lire le fichier JSON lors du chargement du composant
+    //     fs.readFile('data.json', 'utf-8')
+    //         .then((fileData: any) => {
+    //             setData(JSON.parse(fileData));
+    //         })
+    //         .catch((err: any) => {
+    //             console.error('Erreur lors de la lecture du fichier JSON :', err);
+    //         });
+    // }, []);
 
     const handleSaveClick = () => {
         // Ajouter le nouvel objet de données au tableau de données
@@ -50,10 +50,12 @@ export default function AddNew() {
 
         const updatedData: any = [...data, newData];
 
+        setData(updatedData)
+
         // Écrire les données mises à jour dans le fichier JSON
-        fs.writeFile('data.json', JSON.stringify(updatedData), 'utf-8')
-            .then(() => {
-                setData(updatedData);
+        // fs.writeFile('data.json', JSON.stringify(updatedData), 'utf-8')
+        //     .then(() => {
+        //         setData(updatedData);
                 setFormData({
                     utilisateur: '',
                     categorie: '',
@@ -62,10 +64,10 @@ export default function AddNew() {
                     sp: '',
                     sf: '',
                 });
-            })
-            .catch((err) => {
-                console.error('Erreur lors de l\'écriture du fichier JSON :', err);
-            });
+        //     })
+        //     .catch((err) => {
+        //         console.error('Erreur lors de l\'écriture du fichier JSON :', err);
+        //     });
     };
 
     console.log('>>>>>>>>>>>', formData);
@@ -94,7 +96,14 @@ export default function AddNew() {
                     sx={{ width: '100%' }}
                     renderInput={(params) => <TextField {...params} label="Utilisateur" />}
                 />
-                <TextField fullWidth label="Catégorie" id="Catégorie" />
+                <TextField 
+                    fullWidth 
+                    label="Catégorie" 
+                    id="catégorie" 
+                    onChange={(e) => {
+                        setFormData({ ...formData, catégorie: e.target.value });
+                    }}
+                />
                 <TextField fullWidth label="Période" id="Période" />
                 <div className='flex space-x-2'>
                     <TextField fullWidth label="Solde actuel" id="sa" />

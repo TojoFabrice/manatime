@@ -36,7 +36,7 @@ const MenuSidebar = () => {
         <div>
             <div className='w-full'>
                 <ul>
-                    <li className='bg-primary  border border-primary border-t-lineTop border-b-lineBottom h-66px flex items-center relative'>
+                    <li className='bg-primary  border border-primary border-t-lineTop border-b-lineBottom h-66px flex items-center relative active:bg-blue-400'>
                         <Link href="/pages/home" className={`${poppins.variable} font-sans font-medium text-lg flex w-full h-full`}>
                             <Image src={accueil} alt="Abscence icon" width={22} height={22} className='ml-5' />
                             <div className='text-center w-full h-[66px] absolute flex justify-center items-center'>
