@@ -11,8 +11,14 @@ import rh from '../assets/icons/Module_RH.svg'
 import salaireEtPaie from '../assets/icons/Module_SalaireetPAie.svg'
 import document from '../assets/icons/Mdule_Documents.svg'
 
+interface Module {
+    title: string,
+    altTitle: string,
+    image: string
+}
 
-export const listModule = [
+
+export const listModule: Module[] = [
     {
         title: "Planning",
         altTitle: "Planning",
