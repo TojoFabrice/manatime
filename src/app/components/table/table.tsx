@@ -1,26 +1,57 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import solder from '../../assets/icons/Solder.svg'
+import ajuster from '../../assets/icons/Ajuster.svg'
+import transferer from '../../assets/icons/Transferer.svg'
 import { Roboto } from 'next/font/google'
+
+import { Toaster, toast } from "react-hot-toast";
+import ModalConfirmDelete from '../modal/ModalConfirmDelete'
 
 const roboto = Roboto({
     subsets: ['latin'],
-    weight : ['100','300','400','500','700','900']
+    weight: ['100', '300', '400', '500', '700', '900']
 })
 
 
+const deleteData = async (id: string) => {
+    const res = fetch(`http://localhost:3000/api/manatime/${id}`, {
+      method: "DELETE",
+      //@ts-ignore
+      "Content-Type": "application/json",
+    });
+    return (await res).json();
+};
 
-const Table = ({datas}:any) => {
+
+const Table = ({ datas }: any) => {
+    const [open, setOpen] = useState(false);
+    const [idToDelete, setIdToDelete] = useState<string>('')
+
+    const handleClickOpen = (id: string) => {
+        setIdToDelete(id)
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDelete = async (id: string) => {
+        await deleteData(id);
+        toast.success("Data Deleted");
+        handleClose()
+    };
 
     return (
         <div className="p-[30px] h-auto">
-            
+            <Toaster />
             <div className="overflow-auto rounded-lg shadow block">
                 <table className={`${roboto.className} font-roboto w-full`}>
-                    <thead className="bg-white border-b text-sousmenu">
-                        <tr className='divide-x h-[38px]'>
+                    <thead className="bg-white border border-borderTable text-menu">
+                        <tr className='divide-x divide-borderTable h-[38px]'>
                             <th className="w-[450px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap">Utilisateurs</th>
                             <th className="w-[450px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap">Catégorie</th>
                             <th className="w-[120px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap">Période</th>
@@ -30,36 +61,47 @@ const Table = ({datas}:any) => {
                             <th className="w-[270px] px-15px text-base font-medium  text-left overflow-hidden whitespace-nowrap"></th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200 font-normal">
+                    <tbody className="divide-y divide-borderTable font-normal">
                         {
-                            datas && datas.map((item:any) => {
-                                return(
-                                    <tr className="bg-white divide-x text-menu h-[39px]" key={item.id}>
-                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">
-                                            <a href="#" className=" text-sousmenu hover:underline">{item.utilisateur}</a>
+                            datas && datas.map((item: any, key: number) => {
+                                return (
+                                    <tr className={`${key % 2 == 0 ? "bg-[#F2F2F2]" : "bg-white"} divide-x divide-borderTable text-menu h-[39px]`} key={key}>
+                                        <td className="px-15px text-base text-shadow whitespace-nowrap">
+                                            <a href="#" className=" text-shadow hover:underline">{item.utilisateur}</a>
                                         </td>
-                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">
-                                            {item.categorie}
+                                        <td className="px-15px text-base text-shadow whitespace-nowrap">
+                                            <div className='flex items-center'>
+                                                <span className={`${key % 2 == 0 ? "bg-[#FF8851]" : "bg-[#A851FF]"} w-3 h-3 block rounded-full mr-[15px]`}></span>
+                                                {item.categorie}
+                                            </div>
                                         </td>
-                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">{item.periode}</td>
-                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">{item.sa}</td>
-                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">{item.sp}</td>
-                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">{item.sf}</td>
-                                        <td className="px-15px text-base text-sousmenu whitespace-nowrap">
+                                        <td className="px-15px text-base text-shadow whitespace-nowrap">{item.periode}</td>
+                                        <td className="px-15px text-base text-shadow whitespace-nowrap">{item.sa}</td>
+                                        <td className="px-15px text-base text-shadow whitespace-nowrap">{item.sp}</td>
+                                        <td className="px-15px text-base text-shadow whitespace-nowrap">{item.sf}</td>
+                                        <td className="px-15px text-base text-shadow whitespace-nowrap">
                                             <div className='flex justify-around'>
-                                                <Image src={solder} alt="solder" width={32} height={32} />
-                                                <Image src={solder} alt="solder" width={32} height={32} />
-                                                <Image src={solder} alt="solder" width={32} height={32} />
+                                                <button>
+                                                    <Image src={ajuster} alt="solder" width={32} height={32} />
+                                                </button>
+                                                <button>
+                                                    <Image src={transferer} alt="solder" width={32} height={32} />
+                                                </button>
+                                                <button onClick={() => handleClickOpen(item.id)}>
+                                                    <Image src={solder} alt="solder" width={32} height={32} />
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
                                 )
                             })
                         }
-                        
+
                     </tbody>
                 </table>
             </div>
+
+            <ModalConfirmDelete open={open} handleClose={handleClose} handleDelete={handleDelete} id={idToDelete}/>
         </div>
     )
 }

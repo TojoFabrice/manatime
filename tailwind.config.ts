@@ -42,6 +42,7 @@ const config: Config = {
         borderMenu: "#0569C2",
         gradientTop: "#094694",
         gradientBottom: "#0281E3",
+        borderTable: "#C4C4C4"
       }
     },
   },

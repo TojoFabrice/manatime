@@ -3,18 +3,7 @@
 import Table from "@/app/components/table/table";
 import { useEffect, useState } from "react";
 
-// async function fetchData() {
-//     const res = await fetch("http://localhost:3000/api/manatime", {
-//         next: {
-//           revalidate: 10,
-//         },
-//       });
-//     const data = await res.json();
-//     return data.dataManaTime;
-// }
-
 export default function Home() {
-    // const datas = await fetchData()
 
     const [datas, setData] = useState(null)
  
@@ -29,8 +18,7 @@ export default function Home() {
         }
     
         fetchData().catch((e) => {
-        // handle the error as needed
-        console.error('An error occurred while fetching the data: ', e)
+            console.error('An error occurred while fetching the data: ', e)
         })
     }, [])
 

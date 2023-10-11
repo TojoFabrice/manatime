@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import React, { useState } from 'react'
 import Image from 'next/image'
@@ -29,9 +31,7 @@ const roboto = Roboto_Mono({
 
 const MenuSidebar = () => {
     const [solde, setSolde] = useState<boolean>(false)
-    const style = {
-        height: 'calc(100% - 198px)'
-    };
+
     return (
         <div>
             <div className='w-full'>

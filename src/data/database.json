@@ -1,56 +1,20 @@
 [
   {
-    "id": "2",
-    "utilisateur": "Utilisateur 2",
-    "categorie": "Catégorie 2",
-    "periode": "Période 2",
-    "sa": 15,
-    "sp": 25,
-    "sf": 35
+    "utilisateur": "Jean Claude",
+    "categorie": "Cat B",
+    "periode": "2023",
+    "sa": "",
+    "sp": "",
+    "sf": "",
+    "id": "1697054246993"
   },
   {
-    "utilisateur": "Vao",
-    "categorie": "B",
-    "periode": "2012-2015",
-    "sa": "41",
-    "sp": "20",
-    "sf": "11",
-    "id": "1697022175424"
-  },
-  {
-    "utilisateur": "koko",
-    "categorie": "F",
-    "periode": "2010-2025",
-    "sa": "222",
-    "sp": "333",
-    "sf": "444",
-    "id": "1697022403881"
-  },
-  {
-    "utilisateur": "ququ",
-    "categorie": "FQ",
-    "periode": "2010-2025",
+    "utilisateur": "Marie Jane",
+    "categorie": "S",
+    "periode": "2031",
     "sa": "45",
-    "sp": "22",
-    "sf": "002",
-    "id": "1697023849653"
-  },
-  {
-    "utilisateur": "fofo",
-    "categorie": "D",
-    "periode": "2014-2025",
-    "sa": "4578",
-    "sp": "42",
-    "sf": "25",
-    "id": "1697027022589"
-  },
-  {
-    "utilisateur": "tutu",
-    "categorie": "T",
-    "periode": "2014-2025",
-    "sa": "77",
-    "sp": "88",
-    "sf": "99",
-    "id": "1697027101103"
+    "sp": "14",
+    "sf": "",
+    "id": "1697054274314"
   }
 ]

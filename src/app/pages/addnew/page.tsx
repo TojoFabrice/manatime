@@ -4,22 +4,10 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from "next/navigation";
-import { Fragment, useRef } from "react";
-// import fs from 'fs/promises';
-
-
-const options = ['Option 1', 'Option 2'];
-
-interface Info {
-    utilisateur: string,
-    categorie: string,
-    periode: string,
-    sa: string,
-    sp: string,
-    sf: string,
-}
+import { useRef } from "react";
+import { Toaster, toast } from "react-hot-toast";
 
 
 const addData = async ({
@@ -48,23 +36,23 @@ const addData = async ({
 
   
 export default function AddNew() {
-    const options = ['Option 1', 'Option 2'];
+    const options = ['Jean Claude', 'Marie Jane', 'Peter Parker', 'Docteur Strange', 'Thor', 'Black Panther', 'John snow', 'Garry Daniel'];
 
     const [value, setValue] = useState<string | null>(options[0]);
     const [inputValue, setInputValue] = useState('');
 
-    const router = useRouter();
-    const userRef = useRef<HTMLInputElement | null>(null);
+   
+    // const userRef = useRef<HTMLInputElement | null>(null);
     const categoryRef = useRef<HTMLInputElement | null>(null);
     const periodeRef = useRef<HTMLInputElement | null>(null);
     const saRef = useRef<HTMLInputElement | null>(null);
     const spRef = useRef<HTMLInputElement | null>(null);
     const sfRef = useRef<HTMLInputElement | null>(null);
+    const router = useRouter();
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         if (value && categoryRef.current && periodeRef.current && saRef.current && spRef.current && sfRef.current) {
-        //   toast.loading("Sending Request 🚀", { id: "1" });
           await addData({
             utilisateur: value ,
             categorie: categoryRef.current?.value,
@@ -73,16 +61,16 @@ export default function AddNew() {
             sp: spRef.current?.value,
             sf: sfRef.current?.value,
           });
-        //   toast.success("Blog Posted Successfully", { id: "1" });
+          toast.success("Enregistrement Successfully");
           router.push("/pages/home");
         }
-        console.log(value + " " +categoryRef.current?.value);
         
       };
     
 
     return (
         <div className='flex justify-center mt-20 bg-white w-3/4 m-auto p-7'>
+            <Toaster />
             <Box
                 sx={{
                     width: 1000,
