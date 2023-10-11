@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import Image from 'next/image'
 import solder from '../../assets/icons/Solder.svg'
@@ -8,7 +10,10 @@ const roboto = Roboto({
     weight : ['100','300','400','500','700','900']
 })
 
-const Table = () => {
+
+
+const Table = ({datas}:any) => {
+
     return (
         <div className="p-[30px] h-auto">
             
@@ -26,68 +31,35 @@ const Table = () => {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 font-normal">
-                        <tr className="bg-white divide-x text-menu h-[39px]">
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                <a href="#" className=" text-blue-500 hover:underline">Jean Marie</a>
-                            </td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                Kring New Fit office chair, mesh + PU, black
-                            </td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                <span
-                                    className="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">Delivered</span>
-                            </td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">16/10/2021</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">$200.00</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">$200.00</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                <div className='flex justify-around'>
-                                    <Image src={solder} alt="solder" width={32} height={32} />
-                                    <Image src={solder} alt="solder" width={32} height={32} />
-                                    <Image src={solder} alt="solder" width={32} height={32} />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className="bg-[#F2F2F2] divide-x h-[38px]">
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                <a href="#" className=" text-blue-500 hover:underline">Paul Rogue</a>
-                            </td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">Kring New Fit office chair, mesh + PU, black</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                <span
-                                    className="p-1.5 text-xs font-medium uppercase tracking-wider text-yellow-800 bg-yellow-200 rounded-lg bg-opacity-50">Shipped</span>
-                            </td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">16/10/2021</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">$200.00</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">$200.00</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                <div className='flex justify-around'>
-                                    <Image src={solder} alt="solder" width={32} height={32} />
-                                    <Image src={solder} alt="solder" width={32} height={32} />
-                                    <Image src={solder} alt="solder" width={32} height={32} />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className="bg-white divide-x h-[38px]">
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                <a href="#" className=" text-blue-500 hover:underline">Chris brown</a>
-                            </td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">Kring New Fit office chair, mesh + PU, black</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">
-                                <span
-                                    className="p-1.5 text-xs font-medium uppercase tracking-wider text-gray-800 bg-gray-200 rounded-lg bg-opacity-50">Cancelled</span>
-                            </td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">16/10/2021</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">$200.00</td>
-                            <td className="px-15px text-base text-gray-700 whitespace-nowrap">$200.00</td>
-                            <td className="px-15px py-[3px] text-base text-gray-700 whitespace-nowrap">
-                                <div className='flex justify-around'>
-                                    <Image src={solder} alt="solder" width={32} height={32} />
-                                    <Image src={solder} alt="solder" width={32} height={32} />
-                                    <Image src={solder} alt="solder" width={32} height={32} />
-                                </div>
-                            </td>
-                        </tr>
+                        {
+                            datas.map((item:any) => {
+                                return(
+                                    <tr className="bg-white divide-x text-menu h-[39px]" key={item.id}>
+                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">
+                                            <a href="#" className=" text-blue-500 hover:underline">{item.utilisateur}</a>
+                                        </td>
+                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">
+                                            {item.categorie}
+                                        </td>
+                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">
+                                            <span
+                                                className="p-1.5 text-xs font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-lg bg-opacity-50">Delivered</span>
+                                        </td>
+                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">{item.sa}</td>
+                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">{item.sp}</td>
+                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">{item.sf}</td>
+                                        <td className="px-15px text-base text-gray-700 whitespace-nowrap">
+                                            <div className='flex justify-around'>
+                                                <Image src={solder} alt="solder" width={32} height={32} />
+                                                <Image src={solder} alt="solder" width={32} height={32} />
+                                                <Image src={solder} alt="solder" width={32} height={32} />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                        
                     </tbody>
                 </table>
             </div>

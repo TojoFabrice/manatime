@@ -20,7 +20,6 @@ const loadData = async () => {
       dataManaTime = JSON.parse(jsonData);
       
     } catch (error) {
-        console.log('miditra error',error);
       dataManaTime = [];
     }
 };
