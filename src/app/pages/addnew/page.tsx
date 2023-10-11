@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
+import { Fragment, useRef } from "react";
 // import fs from 'fs/promises';
 
 
@@ -19,58 +21,58 @@ interface Info {
     sf: string,
 }
 
-export default function AddNew() {
-    const [data, setData] = useState([]);
-    const [formData, setFormData] = useState<any>({
-        utilisateur: '',
-        categorie: '',
-        periode: '',
-        sa: '',
-        sp: '',
-        sf: '',
+
+const addData = async ({
+    utilisateur,
+    categorie,
+    periode,
+    sa,
+    sp,
+    sf
+  }: {
+    utilisateur: string;
+    categorie: string;
+    periode: string;
+    sa: string;
+    sp: string;
+    sf: string
+  }) => {
+    const res = fetch("http://localhost:3000/api/manatime", {
+      method: "POST",
+      body: JSON.stringify({ utilisateur, categorie, periode, sa, sp, sf }),
+      //@ts-ignore
+      "Content-Type": "application/json",
     });
+    return (await res).json();
+  };
 
-    // useEffect(() => {
-    //     // Lire le fichier JSON lors du chargement du composant
-    //     fs.readFile('data.json', 'utf-8')
-    //         .then((fileData: any) => {
-    //             setData(JSON.parse(fileData));
-    //         })
-    //         .catch((err: any) => {
-    //             console.error('Erreur lors de la lecture du fichier JSON :', err);
-    //         });
-    // }, []);
+export default function AddNew() {
+    const router = useRouter();
+    const userRef = useRef<HTMLInputElement | null>(null);
+    const categoryRef = useRef<HTMLInputElement | null>(null);
+    const periodeRef = useRef<HTMLInputElement | null>(null);
+    const saRef = useRef<HTMLInputElement | null>(null);
+    const spRef = useRef<HTMLInputElement | null>(null);
+    const sfRef = useRef<HTMLInputElement | null>(null);
 
-    const handleSaveClick = () => {
-        // Ajouter le nouvel objet de données au tableau de données
-        const newData = {
-            ...formData,
-            id: Date.now(), // Générer un ID unique (à adapter)
-        };
-
-        const updatedData: any = [...data, newData];
-
-        setData(updatedData)
-
-        // Écrire les données mises à jour dans le fichier JSON
-        // fs.writeFile('data.json', JSON.stringify(updatedData), 'utf-8')
-        //     .then(() => {
-        //         setData(updatedData);
-                setFormData({
-                    utilisateur: '',
-                    categorie: '',
-                    periode: '',
-                    sa: '',
-                    sp: '',
-                    sf: '',
-                });
-        //     })
-        //     .catch((err) => {
-        //         console.error('Erreur lors de l\'écriture du fichier JSON :', err);
-        //     });
-    };
-
-    console.log('>>>>>>>>>>>', formData);
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        if (userRef.current && categoryRef.current && periodeRef.current && saRef.current && spRef.current && sfRef.current) {
+        //   toast.loading("Sending Request 🚀", { id: "1" });
+          await addData({
+            utilisateur: userRef.current?.value,
+            categorie: categoryRef.current?.value,
+            periode: periodeRef.current?.value,
+            sa: saRef.current?.value,
+            sp: spRef.current?.value,
+            sf: sfRef.current?.value,
+          });
+        //   toast.success("Blog Posted Successfully", { id: "1" });
+          router.push("/pages/home");
+        }
+        console.log(userRef.current?.value + " " +categoryRef.current?.value);
+        
+      };
     
 
     return (
@@ -80,40 +82,49 @@ export default function AddNew() {
                     width: 1000,
                     maxWidth: '100%',
                 }}
-                className="space-y-3"
+                
             >
-                <Autocomplete
-                    value={formData.utilisateur}
-                    onChange={(_, newValue) => {
-                        setFormData({ ...formData, utilisateur: newValue });
-                    }}
-                    inputValue={formData.utilisateur}
-                    onInputChange={(_, newInputValue) => {
-                        setFormData({ ...formData, utilisateur: newInputValue });
-                    }}
-                    id="utilisateur"
-                    options={options}
-                    sx={{ width: '100%' }}
-                    renderInput={(params) => <TextField {...params} label="Utilisateur" />}
-                />
-                <TextField 
-                    fullWidth 
-                    label="Catégorie" 
-                    id="catégorie" 
-                    onChange={(e) => {
-                        setFormData({ ...formData, catégorie: e.target.value });
-                    }}
-                />
-                <TextField fullWidth label="Période" id="Période" />
-                <div className='flex space-x-2'>
-                    <TextField fullWidth label="Solde actuel" id="sa" />
-                    <TextField fullWidth label="Solde pris" id="sp" />
-                    <TextField fullWidth label="Solde futur" id="sf" />
-                </div>
-                <div className='flex justify-end space-x-3'>
-                    <Button variant="outlined" color="error">Annuler</Button>
-                    <Button variant="outlined" onClick={handleSaveClick}>Enregistrer</Button>
-                </div>
+                <form onSubmit={handleSubmit} className="space-y-3">
+
+                    {/* <Autocomplete
+                        value={formData.utilisateur}
+                        onChange={(_, newValue) => {
+                            setFormData({ ...formData, utilisateur: newValue });
+                        }}
+                        inputValue={formData.utilisateur}
+                        onInputChange={(_, newInputValue) => {
+                            setFormData({ ...formData, utilisateur: newInputValue });
+                        }}
+                        id="utilisateur"
+                        options={options}
+                        sx={{ width: '100%' }}
+                        renderInput={(params) => <TextField {...params} label="Utilisateur" />}
+                    /> */}
+                    <TextField 
+                        inputRef={userRef}
+                        fullWidth 
+                        label="Utilisateur" 
+                        id="Utilisateur" 
+                        
+                    />
+                    <TextField 
+                        inputRef={categoryRef}
+                        fullWidth 
+                        label="Catégorie" 
+                        id="catégorie" 
+                        
+                    />
+                    <TextField fullWidth inputRef={periodeRef} label="Période" id="Période" />
+                    <div className='flex space-x-2'>
+                        <TextField fullWidth inputRef={saRef} label="Soldeactuel" id="sa" />
+                        <TextField fullWidth inputRef={spRef} label="Soldepris" id="sp" />
+                        <TextField fullWidth inputRef={sfRef} label="Soldefutur" id="sf" />
+                    </div>
+                    <div className='flex justify-end space-x-3'>
+                        <Button variant="outlined" color="error">Annuler</Button>
+                        <Button type="submit" variant="outlined">Enregistrer</Button>
+                    </div>
+                </form>
             </Box>
         </div>
 
