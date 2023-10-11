@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import solder from '../../assets/icons/Solder.svg'
 import ajuster from '../../assets/icons/Ajuster.svg'
@@ -16,19 +16,28 @@ const roboto = Roboto({
 })
 
 
-const deleteData = async (id: string) => {
-    const res = fetch(`http://localhost:3000/api/manatime/${id}`, {
-      method: "DELETE",
-      //@ts-ignore
-      "Content-Type": "application/json",
-    });
-    return (await res).json();
-};
+
 
 
 const Table = ({ datas }: any) => {
     const [open, setOpen] = useState(false);
     const [idToDelete, setIdToDelete] = useState<string>('')
+    const [tableData, setTableData] = useState([]);
+
+    useEffect(() => {
+        setTableData(datas)
+    },[datas])
+
+    const deleteData = async (id: string) => {
+        const res = fetch(`http://localhost:3000/api/manatime/${id}`, {
+          method: "DELETE",
+          //@ts-ignore
+          "Content-Type": "application/json",
+        });
+        setTableData((prev) => prev.filter((item:any) => item.id !== id))
+        return (await res).json();
+    };
+
 
     const handleClickOpen = (id: string) => {
         setIdToDelete(id)
@@ -63,7 +72,7 @@ const Table = ({ datas }: any) => {
                     </thead>
                     <tbody className="divide-y divide-borderTable font-normal">
                         {
-                            datas && datas.map((item: any, key: number) => {
+                            tableData && tableData.map((item: any, key: number) => {
                                 return (
                                     <tr className={`${key % 2 == 0 ? "bg-[#F2F2F2]" : "bg-white"} divide-x divide-borderTable text-menu h-[39px]`} key={key}>
                                         <td className="px-15px text-base text-shadow whitespace-nowrap">
