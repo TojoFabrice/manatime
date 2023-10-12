@@ -6,10 +6,11 @@ import { useEffect, useState } from "react";
 export default function Home() {
 
     const [datas, setData] = useState(null)
- 
+    const server = process.env.SERVER;
+    
     useEffect(() => {
         const fetchData = async () => {
-        const response = await fetch('http://localhost:3000/api/manatime')
+        const response = await fetch(`${server}/api/manatime`)
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
         }

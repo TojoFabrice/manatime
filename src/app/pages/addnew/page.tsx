@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { Toaster, toast } from "react-hot-toast";
 
-
+const server = process.env.SERVER;
 const addData = async ({
     utilisateur,
     categorie,
@@ -25,7 +25,7 @@ const addData = async ({
     sp: string;
     sf: string
   }) => {
-    const res = fetch("http://localhost:3000/api/manatime", {
+    const res = fetch(`${server}/api/manatime`, {
       method: "POST",
       body: JSON.stringify({ utilisateur, categorie, periode, sa, sp, sf }),
       //@ts-ignore

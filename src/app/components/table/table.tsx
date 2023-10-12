@@ -23,13 +23,14 @@ const Table = ({ datas }: any) => {
     const [open, setOpen] = useState(false);
     const [idToDelete, setIdToDelete] = useState<string>('')
     const [tableData, setTableData] = useState([]);
-
+    const server = process.env.SERVER;
+    
     useEffect(() => {
         setTableData(datas)
     },[datas])
 
     const deleteData = async (id: string) => {
-        const res = fetch(`http://localhost:3000/api/manatime/${id}`, {
+        const res = fetch(`${server}api/manatime/${id}`, {
           method: "DELETE",
           //@ts-ignore
           "Content-Type": "application/json",
